@@ -5,25 +5,33 @@
   justify-content: flex-start;
   align-items: center;
   font-family: "Balsamiq Sans", cursive;
-  background-color: rgb(231, 235, 240);
+  background-color: #e1f5fe;
   min-height: 100vh;
   padding-top: 100px;
 }
-.chat__area {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: flex-start;
-  justify-content: center;
+.wrapper{
+  text-align: center;
+  max-width: 1200px;
+  padding: 10px;
 }
-.error{
-  background-color: red;
-  position: absolute;
-  box-shadow: 0 0 20px red,
-              0 0 50px red,
-              0 0 80px red;
-  padding: 20px;
-  z-index: 5;
-  top:20%;
-  box-sizing: border-box;
+.contacts{
+  &__actions{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+.form{
+  &__inputs{
+    display: flex;
+    flex-wrap: wrap;
+    gap:10px;
+    justify-content: center;
+  }
+  &__buttons{
+    width: 100px;
+  }
+  &__heading{
+    width: 100%;
+  }
 }

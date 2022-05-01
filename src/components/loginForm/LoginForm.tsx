@@ -28,17 +28,18 @@ const LoginForm: FC<ISubmit> = ({ onSubmit }) => {
                 type="email"
                 value={login}
                 onChange={handleChangeLogin}
-                label="Please type here..."
+                label="Please type email here..."
                 variant="outlined" />
             <TextField
                 type="password"
                 value={pass}
                 onChange={handleChangePass}
-                label="Please type here..."
+                label="Please type password here..."
                 variant="outlined" />
             <Button
                 type="submit"
-                variant="contained"
+                sx={{ backgroundColor: "#4dabf5", padding: "15px" }}
+                variant='contained'
             >
                 Submit!
             </Button>
