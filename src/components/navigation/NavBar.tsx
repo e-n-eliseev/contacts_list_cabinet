@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { FC, MouseEvent } from 'react';
 
 const NavBar: FC = () => {
-
     const navigate = useNavigate();
+
     const handleChange = (event: MouseEvent) => {
         const element = event.target as HTMLElement;
         if (element.tagName === "BUTTON") {
@@ -14,6 +14,7 @@ const NavBar: FC = () => {
                 : navigate(`/${element.textContent?.toLowerCase()}`)
         }
     };
+
     return (
 
         <Box sx={{

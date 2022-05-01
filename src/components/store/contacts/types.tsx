@@ -1,4 +1,4 @@
-import { IContact, IContactFilter } from "../../types/types";
+import { IContact } from "../../types/types";
 
 
 export interface IContactsState {
@@ -9,17 +9,13 @@ export interface IContactsState {
 }
 
 export enum ContactsActionTypes {
-    ADD_CONTACT = "CONTACTS::ADD_CONTACT",
     LOAD_CONTACT = "CONTACTS::LOAD_CONTACT",
     LOADED_CONTACT = "CONTACTS::LOADED_CONTACT",
     ERROR_CONTACT = "CONTACTS::ERROR_CONTACT",
     DELETE_CONTACT = "CONTACTS::DELETE_CONTACT",
     CHANGE_CONTACT = "CONTACTS::CHANGE_CONTACT",
-    FILTER_CONTACT = "CONTACTS::FILTER_CONTACT"
-}
-interface IAddContact {
-    type: ContactsActionTypes.ADD_CONTACT,
-    data: IContact
+    FILTER_CONTACT = "CONTACTS::FILTER_CONTACT",
+    RESET_FILTER_CONTACT = "CONTACTS::RESET_FILTER_CONTACT"
 }
 interface ILoadContact {
     type: ContactsActionTypes.LOAD_CONTACT
@@ -34,7 +30,7 @@ interface IErrorContact {
 }
 interface IDeleteContact {
     type: ContactsActionTypes.DELETE_CONTACT;
-    param: IContactFilter
+    data: string
 }
 interface IChangeContact {
     type: ContactsActionTypes.CHANGE_CONTACT;
@@ -42,16 +38,19 @@ interface IChangeContact {
 }
 interface IFilterContact {
     type: ContactsActionTypes.FILTER_CONTACT;
-    param: IContactFilter,
+    param: string,
     data: string
+}
+interface IResetFilterContact {
+    type: ContactsActionTypes.RESET_FILTER_CONTACT;
 }
 
 
 export type ContactAction =
-    IAddContact
-    | ILoadContact
+    ILoadContact
     | ILoadedContact
     | IErrorContact
     | IDeleteContact
     | IChangeContact
     | IFilterContact
+    | IResetFilterContact

@@ -5,6 +5,7 @@ import { logIn, signUp } from "../services/firebase";
 import { FC } from 'react';
 import { IAuthProps } from "../types/types";
 import { ILogIn } from "../types/types";
+import { FirebaseError } from "firebase/app";
 
 
 const LoginPage: FC<IAuthProps> = ({ authed }) => {
@@ -18,8 +19,9 @@ const LoginPage: FC<IAuthProps> = ({ authed }) => {
                 await logIn(login, pass);
             }
         }
-        catch (error: any) {
-            setError(error.code.split("/")[1]);
+        catch (error) {
+            if (error instanceof FirebaseError)
+                setError(error.code.split("/")[1]);
         }
     };
 

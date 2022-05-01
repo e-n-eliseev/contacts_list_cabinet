@@ -6,6 +6,9 @@ import FormBody from '../../UI components/FormBody';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
+import { useDispatch } from 'react-redux';
+import { addContactFB, changeContactFB, deleteContactFB } from '../../store/contacts/actions';
+
 
 const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
     const [name, setName] = useState<string>(item?.name || "");
@@ -13,6 +16,7 @@ const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
     const [phone, setPhone] = useState<string>(item?.phone || "");
     const [email, setEmail] = useState<string>(item?.email || "");
     const [isChanged, setIsChanged] = useState<boolean>(false);
+    const dispatch = useDispatch();
 
     const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
         const item = event.target.value;
@@ -20,6 +24,9 @@ const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
             setName(item);
             if (!isChanged) setIsChanged(true)
         }
+    };
+    const onHandleDelete = () => {
+        dispatch<any>(deleteContactFB(item?.idFb!))
     };
     const handleChangeSurname = (event: ChangeEvent<HTMLInputElement>) => {
         setSurname(event.target.value);
@@ -40,7 +47,9 @@ const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
 
     const handleSubmit = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
-        //onSubmit({ login, pass });
+        isAddForm
+            ? dispatch<any>(addContactFB({ id: Date.now().toString(), name, surname, phone, email }))
+            : dispatch<any>(changeContactFB({ id: item?.id, idFb: item?.idFb, name, surname, phone, email }))
         setName("");
         setSurname("");
         setPhone("");
@@ -89,9 +98,9 @@ const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
                         ? null
                         :
                         <Tooltip title="Please click here to delete contact">
-                            <IconButton >
+                            <IconButton onClick={onHandleDelete}>
                                 <DeleteIcon />
-                            </IconButton>
+                            </IconButton >
                         </Tooltip>}
                 </div>
             </FormBody>

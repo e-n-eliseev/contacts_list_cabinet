@@ -1,3 +1,4 @@
+import { IContact } from "../../types/types";
 import { ContactAction, ContactsActionTypes, IContactsState } from "./types";
 
 const initialState: IContactsState = {
@@ -9,28 +10,25 @@ const initialState: IContactsState = {
 
 const contactsReducer = (state = initialState, action: ContactAction): IContactsState => {
     switch (action.type) {
-        case ContactsActionTypes.ADD_CONTACT:
-            const newContacts = [...state.filteredContacts];
-            newContacts.push(action.data);
-            return {
-                ...state,
-                filteredContacts: newContacts,
-                contacts: newContacts
-            }
         case ContactsActionTypes.CHANGE_CONTACT:
-            const itemNumber = state.contacts.findIndex(item => item.id === action.data.id)
+            const itemNumberContacts = state.contacts.findIndex(item => item.id === action.data.id);
+            const itemNumberFilteredContacts = state.filteredContacts.findIndex(item => item.id === action.data.id);
+            const changedFilteredContacts = [...state.filteredContacts];
+            if (itemNumberFilteredContacts !== -1) {
+                changedFilteredContacts.splice(itemNumberFilteredContacts, 1, { ...action.data })
+            }
+            const changedContacts = [...state.contacts];
+            changedContacts.splice(itemNumberContacts, 1, { ...action.data })
             return {
                 ...state,
-                filteredContacts: [...state.filteredContacts,
-                state.contacts[itemNumber] = action.data],
-                contacts: [...state.contacts,
-                state.contacts[itemNumber] = action.data]
+                contacts: changedContacts,
+                filteredContacts: changedFilteredContacts
             }
         case ContactsActionTypes.DELETE_CONTACT:
             return {
                 ...state,
-                filteredContacts: state.contacts.filter(item => item.email !== action.param),
-                contacts: state.contacts.filter(item => item[action.param] !== action.param)
+                filteredContacts: state.contacts.filter(item => item.idFb !== action.data),
+                contacts: state.contacts.filter(item => item.idFb !== action.data)
             };
         case ContactsActionTypes.ERROR_CONTACT:
             return {
@@ -39,9 +37,15 @@ const contactsReducer = (state = initialState, action: ContactAction): IContacts
                 error: action.data
             };
         case ContactsActionTypes.FILTER_CONTACT:
+            console.log(action.param)
             return {
                 ...state,
-                filteredContacts: state.contacts.filter(item => item[action.param] === action.data)
+                filteredContacts: state.contacts.filter(item => item[action.param as keyof IContact]?.includes(action.data))
+            };
+        case ContactsActionTypes.RESET_FILTER_CONTACT:
+            return {
+                ...state,
+                filteredContacts: state.contacts.slice()
             };
         case ContactsActionTypes.LOAD_CONTACT:
             return {
@@ -63,3 +67,4 @@ const contactsReducer = (state = initialState, action: ContactAction): IContacts
 }
 
 export default contactsReducer;
+export type RootState = ReturnType<typeof contactsReducer>

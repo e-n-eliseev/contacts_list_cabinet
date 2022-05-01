@@ -25,7 +25,8 @@ export interface ILogIn {
     pass: string
 }
 export interface IContact {
-    id?: string | number;
+    id?: string;
+    idFb?: string;
     name?: string;
     surname?: string;
     phone?: string;

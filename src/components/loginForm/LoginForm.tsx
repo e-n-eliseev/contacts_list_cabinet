@@ -14,7 +14,6 @@ const LoginForm: FC<ISubmit> = ({ onSubmit }) => {
     const handleChangePass = (event: ChangeEvent<HTMLInputElement>) => {
         setPass(event.target.value);
     };
-
     const handleSubmit = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         onSubmit({ login, pass });

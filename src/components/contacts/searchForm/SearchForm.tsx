@@ -1,7 +1,7 @@
 import Tooltip from '@mui/material/Tooltip';
 import { FC, memo, useState, ChangeEvent } from 'react';
 import { TextField } from "@mui/material";
-import { IContactItem } from '../../types/types';
+import { IContact, IContactItem } from '../../types/types';
 import FormBody from '../../UI components/FormBody';
 import SearchIcon from '@mui/icons-material/Search';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,14 +9,17 @@ import IconButton from '@mui/material/IconButton';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import { filterContacts } from '../../store/contacts/actions';
+import { useDispatch } from 'react-redux';
 
 const SearchForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
-    const [param, setParam] = useState<string>("");
+    const [param, setParam] = useState<keyof IContact>("name");
     const [data, setData] = useState<string>("");
     const [isChanged, setIsChanged] = useState<boolean>(false);
+    const dispatch = useDispatch();
 
     const handleChange = (event: SelectChangeEvent) => {
-        setParam(event.target.value as string);
+        setParam(event.target.value as keyof IContact);
         if (data) setIsChanged(true);
     };
     const handleChangeData = (event: ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +31,7 @@ const SearchForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
     };
     const handleSubmit = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
-        //onSubmit({ login, pass });
+        dispatch(filterContacts(param, data));
         setIsChanged(false);
     };
 

@@ -32,7 +32,6 @@ export const logOut = async () => {
     await signOut(auth);
 };
 
-export const userRef = ref(db, "user");
-export const contactsRef = ref(db, "contacts");
 export const getContactsRefById = (id: string) => ref(db, `contacts/${id}`);
 export const getContactsListRefById = (id: string) => ref(db, `contacts/${id}/contactsList`);
+export const getContactListRefById = (id: string, idFb: string) => ref(db, `contacts/${id}/contactsList/${idFb}`);
