@@ -8,6 +8,7 @@
     "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.3",
+    "@reduxjs/toolkit": "https://pkg.csb.dev/reduxjs/redux-toolkit/commit/933aa4a1/@reduxjs/toolkit",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
@@ -16,6 +17,7 @@
     "@types/node": "^16.11.32",
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.3",
+    "@types/react-redux": "^7.1.24",
     "firebase": "^9.7.0",
     "node-sass": "^7.0.1",
     "package": "^1.0.1",
@@ -27,7 +29,6 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "typescript": "^4.6.4",
-    "uniqid": "^5.4.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

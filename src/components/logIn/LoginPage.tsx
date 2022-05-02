@@ -48,15 +48,7 @@ const LoginPage: FC<IAuthProps> = ({ authed }) => {
                     ? "Go back to login form"
                     : "If you don't have an account, please go to signup form"}
             </Link>
-            {error && <h2 style={{
-                position: "absolute",
-                backgroundColor: "#ff6333",
-                zIndex: 5, top: "20%",
-                textAlign: "center",
-                padding: "20px",
-                borderRadius: "10px",
-                boxShadow: "0 0 20px #ff6333,0 0 50px #ff6333,0 0 80px #ff6333"
-            }}>{error}</h2>}
+            {error && <h2 className="error">{error}</h2>}
         </>
     )
 }

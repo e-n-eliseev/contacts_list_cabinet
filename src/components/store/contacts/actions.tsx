@@ -46,6 +46,12 @@ export const loadedContacts = (data: IContact[]): ContactAction => {
         data
     }
 }
+export const errorContacts = (data: string): ContactAction => {
+    return {
+        type: ContactsActionTypes.ERROR_CONTACT,
+        data
+    }
+}
 
 
 export const addContactFB = ({ id, name, surname, phone, email }: IContact): ThunkAction<void, RootState, unknown, AnyAction> => () => {
@@ -82,7 +88,11 @@ export const initContactsListTrack = (): ThunkAction<void, RootState, unknown, A
             return acc;
         }, []);
         dispatch(loadedContacts(contactsIdArr))
-    });
+    },
+        (error) => {
+            dispatch(errorContacts(error.message))
+        }
+    );
 
     unsubscribe = () => {
         unsubscribeContacts();

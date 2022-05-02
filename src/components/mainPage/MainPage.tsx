@@ -9,7 +9,7 @@ const MainPage: FC<IAuthProps> = ({ authed }) => {
             <h1 >Welcome to my react contacts list cabinet SPA</h1>
             <p >
                 This page has been created by Evgeny Eliseev.<br /><br />
-                I've used React, Router , Hooks , Redux , Redux-thunk, TS and FireBase to build it.<br /><br />
+                I've used React, MUI, Router , Hooks, Redux, Redux-thunk, TS and FireBase to build it.<br /><br />
                 Here you can add/remove/modify you contacts list!<br /><br />
                 <a href="https://github.com/e-n-eliseev/contacts_list_cabinet">
                     If you click here, you can visit my GitHub page!

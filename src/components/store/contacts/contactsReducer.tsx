@@ -37,7 +37,6 @@ const contactsReducer = (state = initialState, action: ContactAction): IContacts
                 error: action.data
             };
         case ContactsActionTypes.FILTER_CONTACT:
-            console.log(action.param)
             return {
                 ...state,
                 filteredContacts: state.contacts.filter(item => item[action.param as keyof IContact]?.includes(action.data))

@@ -33,6 +33,7 @@ const SearchForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
         event.preventDefault();
         dispatch(filterContacts(param, data));
         setIsChanged(false);
+        setData("");
     };
 
     return (

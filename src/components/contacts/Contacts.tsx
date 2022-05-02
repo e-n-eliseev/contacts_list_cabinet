@@ -12,12 +12,14 @@ import SearchForm from "./searchForm/SearchForm";
 import { shallowEqual, useDispatch } from "react-redux";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { initContactsListTrack, resetFilterContacts, stopContactsListTrack } from "../store/contacts/actions";
-import { getContacts, getLoading } from "../store/contacts/contactsSelectors";
+import { getContacts, getError, getLoading } from "../store/contacts/contactsSelectors";
+import { ContactAction } from "../store/contacts/types";
 
 const Contacts: FC = () => {
     const dispatch = useDispatch();
     const contactsList = useTypedSelector(getContacts, shallowEqual);
     const loading = useTypedSelector(getLoading);
+    const error = useTypedSelector(getError);
 
     useEffect(() => {
         dispatch<any>(initContactsListTrack());
@@ -34,6 +36,7 @@ const Contacts: FC = () => {
             <h1 className="contacts__heading">
                 Welcome to your contacts list!
             </h1>
+            {error ? <h2 className="error">Error during connectiong to the database, please reboot the page</h2> : null}
             {loading
                 ? <CircularProgress />
                 : <>
