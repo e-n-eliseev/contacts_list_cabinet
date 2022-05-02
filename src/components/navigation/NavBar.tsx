@@ -5,8 +5,8 @@ import { FC, MouseEvent } from 'react';
 
 const NavBar: FC = () => {
     const navigate = useNavigate();
-
-    const handleChange = (event: MouseEvent) => {
+    //обработчики кликов на кнопки навигации
+    const handleChange = (event: MouseEvent): void => {
         const element = event.target as HTMLElement;
         if (element.tagName === "BUTTON") {
             element.textContent === "Main Page"

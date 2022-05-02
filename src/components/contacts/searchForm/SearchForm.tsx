@@ -13,23 +13,27 @@ import { filterContacts } from '../../store/contacts/actions';
 import { useDispatch } from 'react-redux';
 
 const SearchForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
+    //парметры фильтрации
     const [param, setParam] = useState<keyof IContact>("name");
     const [data, setData] = useState<string>("");
+    //состояние видимости кнопки добавления
     const [isChanged, setIsChanged] = useState<boolean>(false);
     const dispatch = useDispatch();
-
-    const handleChange = (event: SelectChangeEvent) => {
+    //обработчик устаноки параметра фильтрации
+    const handleChange = (event: SelectChangeEvent): void => {
         setParam(event.target.value as keyof IContact);
         if (data) setIsChanged(true);
     };
-    const handleChangeData = (event: ChangeEvent<HTMLInputElement>) => {
+    //обработчик установки строки запроса
+    const handleChangeData = (event: ChangeEvent<HTMLInputElement>): void => {
         const item = event.target.value.trim()
         if (item) {
             setData(item);
             if (param) setIsChanged(true);
         }
     };
-    const handleSubmit = (event: ChangeEvent<HTMLInputElement>) => {
+    //обработчик отправки формы
+    const handleSubmit = (event: ChangeEvent<HTMLInputElement>): void => {
         event.preventDefault();
         dispatch(filterContacts(param, data));
         setIsChanged(false);

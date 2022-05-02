@@ -24,12 +24,13 @@
 .form{
   &__inputs{
     display: flex;
+    width: 100%;
     flex-wrap: wrap;
     gap:10px;
     justify-content: center;
   }
   &__buttons{
-    width: 100px;
+    width: 230px;
   }
   &__heading{
     width: 100%;

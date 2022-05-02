@@ -9,8 +9,9 @@ import { FirebaseError } from "firebase/app";
 
 
 const LoginPage: FC<IAuthProps> = ({ authed }) => {
+    //сообщание ошибки
     const [error, setError] = useState<string>("");
-
+    //авторизация
     const handleSubmit = async ({ login, pass }: ILogIn): Promise<void> => {
         try {
             if (authed) {
@@ -24,7 +25,7 @@ const LoginPage: FC<IAuthProps> = ({ authed }) => {
                 setError(error.code.split("/")[1]);
         }
     };
-
+    //сброс ошибки авторизации через 2 сек
     useEffect(() => {
         const timeout = setTimeout(() => setError(""), 2000);
         return () => clearTimeout(timeout)

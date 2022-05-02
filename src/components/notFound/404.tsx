@@ -6,7 +6,7 @@ import { FC } from 'react';
 const PageNotFound: FC = () => {
 
     const navigate = useNavigate();
-
+    //перенаправление через 5 сек после ошибки роутинга
     useEffect(() => {
         let timeout = setTimeout(() => {
             navigate("/")

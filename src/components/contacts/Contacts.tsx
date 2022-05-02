@@ -11,23 +11,27 @@ import ContactForm from "./contactForm/ContactForm";
 import SearchForm from "./searchForm/SearchForm";
 import { shallowEqual, useDispatch } from "react-redux";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { initContactsListTrack, resetFilterContacts, stopContactsListTrack } from "../store/contacts/actions";
+import {
+    initContactsListTrack,
+    resetFilterContacts,
+    stopContactsListTrack
+} from "../store/contacts/actions";
 import { getContacts, getError, getLoading } from "../store/contacts/contactsSelectors";
-import { ContactAction } from "../store/contacts/types";
 
 const Contacts: FC = () => {
     const dispatch = useDispatch();
+    //получение данных из стора
     const contactsList = useTypedSelector(getContacts, shallowEqual);
     const loading = useTypedSelector(getLoading);
     const error = useTypedSelector(getError);
-
+    //подписка/отписка на состояние данных в базе при монтировании/размонтировании компонета 
     useEffect(() => {
         dispatch<any>(initContactsListTrack());
         return () => {
             dispatch<any>(stopContactsListTrack());
         };
     }, []);
-
+    //состояние видимости форм поиска и добавления контакта
     const [addFormVision, setAddFormVision] = useState<boolean>(false);
     const [searchFormVision, setSearchFormVision] = useState<boolean>(false);
 

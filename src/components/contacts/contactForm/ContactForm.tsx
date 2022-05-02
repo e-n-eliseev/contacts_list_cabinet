@@ -11,13 +11,15 @@ import { addContactFB, changeContactFB, deleteContactFB } from '../../store/cont
 
 
 const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
+    //устанавливаем данные полей 
     const [name, setName] = useState<string>(item?.name || "");
     const [surname, setSurname] = useState<string>(item?.surname || "");
     const [phone, setPhone] = useState<string>(item?.phone || "");
     const [email, setEmail] = useState<string>(item?.email || "");
+    //установки состояния видимости кнопки сохраниения данных
     const [isChanged, setIsChanged] = useState<boolean>(false);
     const dispatch = useDispatch();
-
+    //обработчик полей ввода
     const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
         const item = event.target.value;
         if (item.trim()) {
@@ -44,7 +46,7 @@ const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
         setEmail(event.target.value);
         if (!isChanged) setIsChanged(true)
     };
-
+    //обработчик отправки формы
     const handleSubmit = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         isAddForm

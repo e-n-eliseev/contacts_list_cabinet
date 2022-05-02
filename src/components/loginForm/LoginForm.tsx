@@ -5,16 +5,18 @@ import { ISubmit } from "../types/types";
 import FormBody from "../UI components/FormBody";
 
 const LoginForm: FC<ISubmit> = ({ onSubmit }) => {
+    //локально сохраняем данные инпутов
     const [login, setLogin] = useState("");
     const [pass, setPass] = useState("");
-
-    const handleChangeLogin = (event: ChangeEvent<HTMLInputElement>) => {
+    //обработчики изменения инпутов
+    const handleChangeLogin = (event: ChangeEvent<HTMLInputElement>): void => {
         setLogin(event.target.value);
     };
-    const handleChangePass = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChangePass = (event: ChangeEvent<HTMLInputElement>): void => {
         setPass(event.target.value);
     };
-    const handleSubmit = (event: ChangeEvent<HTMLInputElement>) => {
+    //обработчик отправки формы
+    const handleSubmit = (event: ChangeEvent<HTMLInputElement>): void => {
         event.preventDefault();
         onSubmit({ login, pass });
         setLogin("");

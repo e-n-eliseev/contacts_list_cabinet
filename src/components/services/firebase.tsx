@@ -21,17 +21,19 @@ export const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const db = getDatabase(app);
-
+//обработка  подписки
 export const signUp = async (email: string, pass: string) => {
     await createUserWithEmailAndPassword(auth, email, pass);
 };
+//обработка авторизации
 export const logIn = async (email: string, pass: string) => {
     await signInWithEmailAndPassword(auth, email, pass);
 };
+//выход
 export const logOut = async () => {
     await signOut(auth);
 };
-
+//эндпоинты обращения к данным базы
 export const getContactsRefById = (id: string) => ref(db, `contacts/${id}`);
 export const getContactsListRefById = (id: string) => ref(db, `contacts/${id}/contactsList`);
 export const getContactListRefById = (id: string, idFb: string) => ref(db, `contacts/${id}/contactsList/${idFb}`);

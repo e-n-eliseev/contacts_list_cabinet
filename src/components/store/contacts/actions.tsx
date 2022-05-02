@@ -53,7 +53,7 @@ export const errorContacts = (data: string): ContactAction => {
     }
 }
 
-
+//добавление контакта  в базу
 export const addContactFB = ({ id, name, surname, phone, email }: IContact): ThunkAction<void, RootState, unknown, AnyAction> => () => {
     push(getContactsListRefById(auth.currentUser?.uid as string), {
         id,
@@ -63,7 +63,7 @@ export const addContactFB = ({ id, name, surname, phone, email }: IContact): Thu
         email
     })
 }
-
+//изменение записи в базе
 export const changeContactFB = (data: IContact): ThunkAction<void, RootState, unknown, AnyAction> => (dispatch) => {
     dispatch(changeContact(data));
     const dataFb = { ...data }
@@ -71,14 +71,14 @@ export const changeContactFB = (data: IContact): ThunkAction<void, RootState, un
     set(getContactListRefById(auth.currentUser?.uid as string, data?.idFb as string), dataFb);
 
 }
-
+//удаление контакта в базе
 export const deleteContactFB = (id: string): ThunkAction<void, RootState, unknown, AnyAction> => (dispatch) => {
     remove(getContactListRefById(auth.currentUser?.uid as string, id));
     dispatch(deleteContact(id));
 };
 
 let unsubscribe: () => void;
-
+//подписка на изменение состояния записей базы
 export const initContactsListTrack = (): ThunkAction<void, RootState, unknown, AnyAction> => (dispatch) => {
     dispatch(loadContacts())
     const unsubscribeContacts = onValue(getContactsRefById(auth.currentUser?.uid as string), (snapshot) => {
@@ -98,7 +98,7 @@ export const initContactsListTrack = (): ThunkAction<void, RootState, unknown, A
         unsubscribeContacts();
     };
 };
-
+//закрытие подписки на состояние базы контактов
 export const stopContactsListTrack = () => () => {
     unsubscribe();
 };

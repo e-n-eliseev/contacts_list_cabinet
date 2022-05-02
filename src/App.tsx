@@ -12,16 +12,16 @@ import LoginPage from './components/logIn/LoginPage';
 import Contacts from './components/contacts/Contacts';
 
 function App() {
-
+  //локально сохраняем статус авторизации
   const [authed, setAuthed] = useState<boolean>(false);
-
+  //обработчики изменения состояния авторизации в firebase
   const handleLogin = (): void => {
     setAuthed(true);
   };
   const handleLogout = (): void => {
     setAuthed(false);
   };
-  //подписываемся на изменение данных о пользователях в базе
+  //подписываемся на изменение данных о пользователях в firebase
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
