@@ -6,9 +6,11 @@ export interface IContactsState {
     filteredContacts: IContact[];
     loading: boolean;
     error: null | string;
+    authId: string | undefined
 }
 
 export enum ContactsActionTypes {
+    ACTION_FB_CONTACT = "CONTACTS::ACTION_FB_CONTACT",
     LOAD_CONTACT = "CONTACTS::LOAD_CONTACT",
     LOADED_CONTACT = "CONTACTS::LOADED_CONTACT",
     ERROR_CONTACT = "CONTACTS::ERROR_CONTACT",
@@ -16,6 +18,9 @@ export enum ContactsActionTypes {
     CHANGE_CONTACT = "CONTACTS::CHANGE_CONTACT",
     FILTER_CONTACT = "CONTACTS::FILTER_CONTACT",
     RESET_FILTER_CONTACT = "CONTACTS::RESET_FILTER_CONTACT"
+}
+interface IActionFB {
+    type: ContactsActionTypes.ACTION_FB_CONTACT
 }
 interface ILoadContact {
     type: ContactsActionTypes.LOAD_CONTACT
@@ -54,3 +59,4 @@ export type ContactAction =
     | IChangeContact
     | IFilterContact
     | IResetFilterContact
+    | IActionFB

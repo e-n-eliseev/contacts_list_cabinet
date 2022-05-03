@@ -1,3 +1,4 @@
+import { auth } from "../../services/firebase";
 import { IContact } from "../../types/types";
 import { ContactAction, ContactsActionTypes, IContactsState } from "./types";
 //дефолтный стор
@@ -5,7 +6,8 @@ const initialState: IContactsState = {
     filteredContacts: [],
     contacts: [],
     loading: false,
-    error: null
+    error: null,
+    authId: auth.currentUser?.uid
 }
 //редьюсер
 const contactsReducer = (state = initialState, action: ContactAction): IContactsState => {

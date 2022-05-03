@@ -17,6 +17,9 @@ import {
     stopContactsListTrack
 } from "../store/contacts/actions";
 import { getContacts, getError, getLoading } from "../store/contacts/contactsSelectors";
+import { ContactAction } from "../store/contacts/types";
+import { ThunkDispatch } from "redux-thunk";
+import { RootState } from "../store/contacts/contactsReducer";
 
 const Contacts: FC = () => {
     const dispatch = useDispatch();
@@ -26,9 +29,9 @@ const Contacts: FC = () => {
     const error = useTypedSelector(getError);
     //подписка/отписка на состояние данных в базе при монтировании/размонтировании компонета 
     useEffect(() => {
-        dispatch<any>(initContactsListTrack());
+        (dispatch as ThunkDispatch<RootState, unknown, ContactAction>)(initContactsListTrack());
         return () => {
-            dispatch<any>(stopContactsListTrack());
+            (dispatch as ThunkDispatch<RootState, unknown, ContactAction>)(stopContactsListTrack());
         };
     }, []);
     //состояние видимости форм поиска и добавления контакта

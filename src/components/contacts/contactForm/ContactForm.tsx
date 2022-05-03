@@ -8,6 +8,9 @@ import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import { useDispatch } from 'react-redux';
 import { addContactFB, changeContactFB, deleteContactFB } from '../../store/contacts/actions';
+import { ContactAction } from "../../store/contacts/types";
+import { ThunkDispatch } from "redux-thunk";
+import { RootState } from "../../store/contacts/contactsReducer";
 
 
 const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
@@ -28,7 +31,7 @@ const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
         }
     };
     const onHandleDelete = () => {
-        dispatch<any>(deleteContactFB(item?.idFb!))
+        (dispatch as ThunkDispatch<RootState, unknown, ContactAction>)(deleteContactFB(item?.idFb!))
     };
     const handleChangeSurname = (event: ChangeEvent<HTMLInputElement>) => {
         setSurname(event.target.value);
@@ -50,8 +53,25 @@ const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
     const handleSubmit = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         isAddForm
-            ? dispatch<any>(addContactFB({ id: Date.now().toString(), name, surname, phone, email }))
-            : dispatch<any>(changeContactFB({ id: item?.id, idFb: item?.idFb, name, surname, phone, email }))
+            ? (dispatch as ThunkDispatch<RootState,
+                unknown,
+                ContactAction>)(addContactFB({
+                    id: Date.now().toString(),
+                    name,
+                    surname,
+                    phone,
+                    email
+                }))
+            : (dispatch as ThunkDispatch<RootState,
+                unknown,
+                ContactAction>)(changeContactFB({
+                    id: item?.id,
+                    idFb: item?.idFb,
+                    name,
+                    surname,
+                    phone,
+                    email
+                }))
         setName("");
         setSurname("");
         setPhone("");
@@ -98,8 +118,7 @@ const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
                         : null}
                     {isAddForm
                         ? null
-                        :
-                        <Tooltip title="Please click here to delete contact">
+                        : <Tooltip title="Please click here to delete contact">
                             <IconButton onClick={onHandleDelete}>
                                 <DeleteIcon />
                             </IconButton >
