@@ -39,7 +39,7 @@ const LoginForm: FC<ISubmit> = ({ onSubmit }) => {
                 variant="outlined" />
             <Button
                 type="submit"
-                sx={{ backgroundColor: "#4dabf5", padding: "15px" }}
+                sx={{ backgroundColor: "#4dabf5", padding: "15px 82px" }}
                 variant='contained'
             >
                 Submit!
