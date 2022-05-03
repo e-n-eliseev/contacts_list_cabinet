@@ -23,6 +23,7 @@ const FormBody: FC<IForm> = ({ children, onSubmit }) => {
                 bgcolor: '#e0f7fa',
                 position: "sticky",
                 top: "100px",
+                zIndex: "2"
             }}
             onSubmit={onSubmit}
             autoComplete="off"
