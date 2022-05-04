@@ -35,10 +35,10 @@ const LoginPage: FC<IAuthProps> = ({ authed }) => {
         <>
             {authed
                 ? <p className={'font-effect-fire-animation wrapper'}>
-                    Please SignUp in the form below!
+                    Please Sign Up in the form below!
                 </p>
                 : <p className={'font-effect-fire-animation wrapper'}>
-                    Please LogIn in the form below!
+                    Please Sign In in the form below!
                 </p>
 
             }
@@ -46,8 +46,8 @@ const LoginPage: FC<IAuthProps> = ({ authed }) => {
             <LoginForm onSubmit={handleSubmit} />
             <Link className={'font-effect-fire-animation wrapper'} to={authed ? "/login" : "/signup"}>
                 {authed
-                    ? "Go back to login form"
-                    : "If you don't have an account, please go to signup form"}
+                    ? "Please click here to go back to sing in form"
+                    : "If you don't have an account, please click here go to sign up form"}
             </Link>
             {error && <h2 className="error">{error}</h2>}
         </>

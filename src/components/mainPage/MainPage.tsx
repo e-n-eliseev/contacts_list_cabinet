@@ -24,7 +24,7 @@ const MainPage: FC<IAuthProps> = ({ authed }) => {
                     <p>You can't open contacts listpage without it!</p>
                 </>
                 : <>
-                    <p>You've signedin!!! Now you can take a look on your
+                    <p>You've signed In!!! Now you can take a look on your
                         <Link to={"/contacts"}>  contacts list  </Link>
                     </p>
                 </>
