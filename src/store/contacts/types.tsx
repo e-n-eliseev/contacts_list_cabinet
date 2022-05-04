@@ -1,4 +1,6 @@
 import { IContact } from "../../components/types/types";
+import { ThunkAction } from 'redux-thunk';
+import { RootState } from "./contactsReducer";
 
 
 export interface IContactsState {
@@ -9,8 +11,12 @@ export interface IContactsState {
     authId: string | undefined
 }
 
+export type ActionFB = ThunkAction<void,
+    RootState,
+    unknown,
+    ContactAction>
+
 export enum ContactsActionTypes {
-    ACTION_FB_CONTACT = "CONTACTS::ACTION_FB_CONTACT",
     LOAD_CONTACT = "CONTACTS::LOAD_CONTACT",
     LOADED_CONTACT = "CONTACTS::LOADED_CONTACT",
     ERROR_CONTACT = "CONTACTS::ERROR_CONTACT",
@@ -19,9 +25,7 @@ export enum ContactsActionTypes {
     FILTER_CONTACT = "CONTACTS::FILTER_CONTACT",
     RESET_FILTER_CONTACT = "CONTACTS::RESET_FILTER_CONTACT"
 }
-interface IActionFB {
-    type: ContactsActionTypes.ACTION_FB_CONTACT
-}
+
 interface ILoadContact {
     type: ContactsActionTypes.LOAD_CONTACT
 }
@@ -59,4 +63,4 @@ export type ContactAction =
     | IChangeContact
     | IFilterContact
     | IResetFilterContact
-    | IActionFB
+

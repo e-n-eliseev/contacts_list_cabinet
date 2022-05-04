@@ -8,9 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import { useDispatch } from 'react-redux';
 import { addContactFB, changeContactFB, deleteContactFB } from '../../../store/contacts/actions';
-import { ContactAction } from "../../../store/contacts/types";
-import { ThunkDispatch } from "redux-thunk";
-import { RootState } from "../../../store/contacts/contactsReducer";
+import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 
 
 const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
@@ -21,7 +19,7 @@ const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
     const [email, setEmail] = useState<string>(item?.email || "");
     //установки состояния видимости кнопки сохраниения данных
     const [isChanged, setIsChanged] = useState<boolean>(false);
-    const dispatch = useDispatch();
+    const dispatch = useTypedDispatch();
     //обработчик полей ввода
     const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
         const item = event.target.value;
@@ -31,7 +29,7 @@ const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
         }
     };
     const onHandleDelete = () => {
-        (dispatch as ThunkDispatch<RootState, unknown, ContactAction>)(deleteContactFB(item?.idFb!))
+        dispatch(deleteContactFB(item?.idFb!))
     };
     const handleChangeSurname = (event: ChangeEvent<HTMLInputElement>) => {
         setSurname(event.target.value);
@@ -53,25 +51,21 @@ const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
     const handleSubmit = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         isAddForm
-            ? (dispatch as ThunkDispatch<RootState,
-                unknown,
-                ContactAction>)(addContactFB({
-                    id: Date.now().toString(),
-                    name,
-                    surname,
-                    phone,
-                    email
-                }))
-            : (dispatch as ThunkDispatch<RootState,
-                unknown,
-                ContactAction>)(changeContactFB({
-                    id: item?.id,
-                    idFb: item?.idFb,
-                    name,
-                    surname,
-                    phone,
-                    email
-                }))
+            ? dispatch(addContactFB({
+                id: Date.now().toString(),
+                name,
+                surname,
+                phone,
+                email
+            }))
+            : dispatch(changeContactFB({
+                id: item?.id,
+                idFb: item?.idFb,
+                name,
+                surname,
+                phone,
+                email
+            }))
         setName("");
         setSurname("");
         setPhone("");

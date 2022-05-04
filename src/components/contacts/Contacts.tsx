@@ -17,21 +17,22 @@ import {
     stopContactsListTrack
 } from "../../store/contacts/actions";
 import { getContacts, getError, getLoading } from "../../store/contacts/contactsSelectors";
+import { useTypedDispatch } from "../hooks/useTypedDispatch";
+import { ThunkAction } from 'redux-thunk';
 import { ContactAction } from "../../store/contacts/types";
-import { ThunkDispatch } from "redux-thunk";
 import { RootState } from "../../store/contacts/contactsReducer";
 
 const Contacts: FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useTypedDispatch();
     //получение данных из стора
     const contactsList = useTypedSelector(getContacts, shallowEqual);
     const loading = useTypedSelector(getLoading);
     const error = useTypedSelector(getError);
     //подписка/отписка на состояние данных в базе при монтировании/размонтировании компонета 
     useEffect(() => {
-        (dispatch as ThunkDispatch<RootState, unknown, ContactAction>)(initContactsListTrack());
+        dispatch(initContactsListTrack());
         return () => {
-            (dispatch as ThunkDispatch<RootState, unknown, ContactAction>)(stopContactsListTrack());
+            dispatch(stopContactsListTrack());
         };
     }, []);
     //состояние видимости форм поиска и добавления контакта
