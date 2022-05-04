@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.scss';
 import { onAuthStateChanged } from "@firebase/auth";
-import { auth } from "./components/services/firebase";
+import { auth } from "./services/firebase";
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './components/mainPage/MainPage';
 import PageNotFound from './components/notFound/404';

@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import { filterContacts } from '../../store/contacts/actions';
+import { filterContacts } from '../../../store/contacts/actions';
 import { useDispatch } from 'react-redux';
 
 const SearchForm: FC<IContactItem> = memo(({ isAddForm, item }) => {

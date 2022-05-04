@@ -6,7 +6,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Tooltip from '@mui/material/Tooltip';
 import CircularProgress from '@mui/material/CircularProgress';
 import { FC, useEffect, useState } from "react";
-import { logOut } from "../services/firebase";
+import { logOut } from "../../services/firebase";
 import ContactForm from "./contactForm/ContactForm";
 import SearchForm from "./searchForm/SearchForm";
 import { shallowEqual, useDispatch } from "react-redux";
@@ -15,11 +15,11 @@ import {
     initContactsListTrack,
     resetFilterContacts,
     stopContactsListTrack
-} from "../store/contacts/actions";
-import { getContacts, getError, getLoading } from "../store/contacts/contactsSelectors";
-import { ContactAction } from "../store/contacts/types";
+} from "../../store/contacts/actions";
+import { getContacts, getError, getLoading } from "../../store/contacts/contactsSelectors";
+import { ContactAction } from "../../store/contacts/types";
 import { ThunkDispatch } from "redux-thunk";
-import { RootState } from "../store/contacts/contactsReducer";
+import { RootState } from "../../store/contacts/contactsReducer";
 
 const Contacts: FC = () => {
     const dispatch = useDispatch();

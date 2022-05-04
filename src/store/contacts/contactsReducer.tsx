@@ -1,5 +1,5 @@
 import { auth } from "../../services/firebase";
-import { IContact } from "../../types/types";
+import { IContact } from "../../components/types/types";
 import { ContactAction, ContactsActionTypes, IContactsState } from "./types";
 //дефолтный стор
 const initialState: IContactsState = {

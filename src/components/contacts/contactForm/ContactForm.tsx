@@ -7,10 +7,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import { useDispatch } from 'react-redux';
-import { addContactFB, changeContactFB, deleteContactFB } from '../../store/contacts/actions';
-import { ContactAction } from "../../store/contacts/types";
+import { addContactFB, changeContactFB, deleteContactFB } from '../../../store/contacts/actions';
+import { ContactAction } from "../../../store/contacts/types";
 import { ThunkDispatch } from "redux-thunk";
-import { RootState } from "../../store/contacts/contactsReducer";
+import { RootState } from "../../../store/contacts/contactsReducer";
 
 
 const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {

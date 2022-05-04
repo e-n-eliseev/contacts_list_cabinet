@@ -1,4 +1,4 @@
-import { IContact } from "../../types/types";
+import { IContact } from "../../components/types/types";
 
 
 export interface IContactsState {

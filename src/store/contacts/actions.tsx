@@ -2,55 +2,54 @@ import { onValue, push, remove, set } from "firebase/database";
 import { auth, getContactListRefById, getContactsRefById, getContactsListRefById } from "../../services/firebase";
 import { ContactAction, ContactsActionTypes } from "./types";
 import { ThunkAction } from 'redux-thunk';
-import { IContact } from "../../types/types";
+import { IContact } from "../../components/types/types";
 import { RootState } from "./contactsReducer";
 
-export const changeContact = (data: IContact): ContactAction => {
-    return {
-        type: ContactsActionTypes.CHANGE_CONTACT,
-        data
-    }
+export const changeContact = (data: IContact): ContactAction => ({
+    type: ContactsActionTypes.CHANGE_CONTACT,
+    data
 }
+)
 
-export const filterContacts = (param: keyof IContact, data: string): ContactAction => {
-    return {
-        type: ContactsActionTypes.FILTER_CONTACT,
-        param,
-        data
-    }
+export const filterContacts = (param: keyof IContact, data: string): ContactAction => ({
+    type: ContactsActionTypes.FILTER_CONTACT,
+    param,
+    data
 }
+)
 
-export const resetFilterContacts = (): ContactAction => {
-    return {
+export const resetFilterContacts = (): ContactAction => (
+    {
         type: ContactsActionTypes.RESET_FILTER_CONTACT,
     }
-}
+)
 
-export const deleteContact = (data: string): ContactAction => {
-    return {
+export const deleteContact = (data: string): ContactAction => (
+    {
         type: ContactsActionTypes.DELETE_CONTACT,
         data
     }
-}
+)
 
-export const loadContacts = (): ContactAction => {
-    return {
+export const loadContacts = (): ContactAction => (
+    {
         type: ContactsActionTypes.LOAD_CONTACT,
     }
-}
+)
 
-export const loadedContacts = (data: IContact[]): ContactAction => {
-    return {
+export const loadedContacts = (data: IContact[]): ContactAction => (
+    {
         type: ContactsActionTypes.LOADED_CONTACT,
         data
     }
-}
-export const errorContacts = (data: string): ContactAction => {
-    return {
+)
+
+export const errorContacts = (data: string): ContactAction => (
+    {
         type: ContactsActionTypes.ERROR_CONTACT,
         data
     }
-}
+)
 
 //добавление контакта  в базу
 export const addContactFB = ({ id, name, surname, phone, email }: IContact): ThunkAction<void,
@@ -104,6 +103,7 @@ export const initContactsListTrack = (): ThunkAction<void,
                 dispatch(loadedContacts(contactsIdArr))
             },
             (error) => {
+                console.log(error)
                 dispatch(errorContacts(error.message))
             }
         );

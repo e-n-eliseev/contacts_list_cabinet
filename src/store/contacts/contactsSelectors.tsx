@@ -1,4 +1,4 @@
-import { IContact } from "../../types/types";
+import { IContact } from "../../components/types/types";
 import { IContactsState } from "./types";
 //селектор отфильтрованного списка контактов
 export const getContacts = (state: IContactsState): IContact[] => state.filteredContacts;

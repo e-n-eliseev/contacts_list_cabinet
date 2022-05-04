@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LoginForm from "../loginForm/LoginForm";
-import { logIn, signUp } from "../services/firebase";
+import { logIn, signUp } from "../../services/firebase";
 import { FC } from 'react';
 import { IAuthProps } from "../types/types";
 import { ILogIn } from "../types/types";
