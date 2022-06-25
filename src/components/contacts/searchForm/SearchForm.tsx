@@ -43,34 +43,34 @@ const SearchForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
     return (
         <>
             <FormBody onSubmit={handleSubmit}>
-                <h2 className='form__heading'>Please chose type of param and add searching data to filter your contacts</h2>
+                <p className='form__heading'>Пожалуйста, выберите параметр и введите данные для поиска </p>
                 <div className='form__inputs'>
                     <FormControl >
-                        <InputLabel id="select-label">Please choose filter parametr</InputLabel>
+                        <InputLabel id="select-label">Параметр</InputLabel>
                         <Select
-                            sx={{ width: "305px" }}
+                            sx={{ width: "295px" }}
                             labelId="select-label"
                             id="select"
                             value={param}
                             label={"Please choose filter parametr"}
                             onChange={handleChange}
                         >
-                            <MenuItem value={"name"}>Name</MenuItem>
-                            <MenuItem value={"surname"}>Surname</MenuItem>
-                            <MenuItem value={"phone"}>Phone</MenuItem>
-                            <MenuItem value={"email"}>Email</MenuItem>
+                            <MenuItem value={"name"}>Имя</MenuItem>
+                            <MenuItem value={"surname"}>Фамилия</MenuItem>
+                            <MenuItem value={"phone"}>Телефон</MenuItem>
+                            <MenuItem value={"email"}>Почта</MenuItem>
                         </Select>
                     </FormControl>
                     <TextField
-                        sx={{ width: "305px" }}
+                        sx={{ width: "295px" }}
                         value={data}
                         onChange={handleChangeData}
-                        label="Please type data for searching here..."
+                        label="Введите данные для поиска..."
                         variant="outlined" />
                 </div>
                 <div className="form__buttons">
                     {isChanged
-                        ? <Tooltip title="Please click here to search contact">
+                        ? <Tooltip title="Поиск!">
                             <IconButton type='submit'>
                                 <SearchIcon />
                             </IconButton>

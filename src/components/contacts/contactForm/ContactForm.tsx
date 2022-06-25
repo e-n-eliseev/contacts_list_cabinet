@@ -1,17 +1,17 @@
 import Tooltip from '@mui/material/Tooltip';
-import { FC, memo, useState, ChangeEvent } from 'react';
+import { FC, memo, useState, ChangeEvent, useEffect } from 'react';
 import { TextField } from "@mui/material";
 import { IContactItem } from '../../types/types';
 import FormBody from '../../UI components/FormBody';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
-import { useDispatch } from 'react-redux';
 import { addContactFB, changeContactFB, deleteContactFB } from '../../../store/contacts/actions';
 import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 
 
 const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
+
     //устанавливаем данные полей 
     const [name, setName] = useState<string>(item?.name || "");
     const [surname, setSurname] = useState<string>(item?.surname || "");
@@ -74,52 +74,52 @@ const ContactForm: FC<IContactItem> = memo(({ isAddForm, item }) => {
     };
 
     return (
-        <>
-            <FormBody onSubmit={handleSubmit}>
-                {isAddForm ? <h2 className='form__heading'>Please type info here and push submit button</h2> : null}
-                <div className='form__inputs'>
-                    <TextField
-                        value={name}
-                        onChange={handleChangeName}
-                        label="Please type name here..."
-                        variant="outlined"
-                        required />
-                    <TextField
-                        value={surname}
-                        onChange={handleChangeSurname}
-                        label="Please type surname here..."
-                        variant="outlined" />
-                    <TextField
-                        value={phone}
-                        onChange={handleChangePhone}
-                        label="Please type phone here..."
-                        variant="outlined"
-                        required />
-                    <TextField
-                        type="email"
-                        value={email}
-                        onChange={handleChangeEmail}
-                        label="Please type email here..."
-                        variant="outlined" />
-                </div>
-                <div className="form__buttons">
-                    {isChanged
-                        ? <Tooltip title="Please click here to add contact info">
-                            <IconButton type='submit'>
-                                <AddIcon />
-                            </IconButton>
-                        </Tooltip>
-                        : null}
-                    {isAddForm
-                        ? null
-                        : <Tooltip title="Please click here to delete contact">
-                            <IconButton onClick={onHandleDelete}>
-                                <DeleteIcon />
-                            </IconButton >
-                        </Tooltip>}
-                </div>
-            </FormBody>
-        </>
+
+        <FormBody onSubmit={handleSubmit} >
+            {isAddForm ? <p className='form__heading'>Пожалуйста, введите данные контакта и нажмите  кнопку "+"</p> : null}
+            <div className='form__inputs'>
+                <TextField
+                    value={name}
+                    onChange={handleChangeName}
+                    label="Имя"
+                    variant="outlined"
+                    required />
+                <TextField
+                    value={surname}
+                    onChange={handleChangeSurname}
+                    label="Фамилия"
+                    variant="outlined" />
+                <TextField
+                    value={phone}
+                    onChange={handleChangePhone}
+                    label="Телефон"
+                    variant="outlined"
+                    required />
+                <TextField
+                    type="email"
+                    value={email}
+                    onChange={handleChangeEmail}
+                    label="Электронная почта"
+                    variant="outlined" />
+            </div>
+            <div className="form__buttons">
+                {isChanged
+                    ? <Tooltip title="Добавить контакт">
+                        <IconButton type='submit'>
+                            <AddIcon />
+                        </IconButton>
+                    </Tooltip>
+                    : null}
+                {isAddForm
+                    ? null
+                    : <Tooltip title="Удалить контакт">
+                        <IconButton onClick={onHandleDelete}>
+                            <DeleteIcon />
+                        </IconButton >
+                    </Tooltip>}
+            </div>
+        </FormBody>
+
     );
 }
 )

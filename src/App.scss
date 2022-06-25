@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Balsamiq+Sans:wght@400;700&display=swap&subset=cyrillic,cyrillic-ext,latin-ext&effect=fire-animation|neon|outline");
+
 .App {
   display: flex;
   flex-direction: column;
@@ -8,35 +9,51 @@
   background-color: #e1f5fe;
   min-height: 100vh;
   padding: 100px 10px 0;
+
+  &__img {
+    width: 375px;
+  }
+
+  &__heading {
+    text-align: center;
+  }
 }
-.wrapper{
+
+.wrapper {
   text-align: center;
   max-width: 1200px;
   padding: 10px;
 }
-.contacts{
-  &__actions{
+
+.contacts {
+  &__actions {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    max-width: 765px;
+    margin: 0 auto;
   }
 }
-.form{
-  &__inputs{
+
+.form {
+  &__inputs {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
-    gap:10px;
+    gap: 10px;
     justify-content: center;
   }
-  &__buttons{
+
+  &__buttons {
     width: 230px;
   }
-  &__heading{
+
+  &__heading {
     width: 100%;
   }
 }
-.error{
+
+.error {
   position: absolute;
   background-color: #ff6333;
   z-index: 5;

@@ -1,9 +1,10 @@
 import Box from '@mui/material/Box';
 import { IForm } from '../types/types';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 
 const FormBody: FC<IForm> = ({ children, onSubmit }) => {
+
     return (
         <Box
             component="form"
@@ -21,9 +22,6 @@ const FormBody: FC<IForm> = ({ children, onSubmit }) => {
                 boxSizing: "border-box",
                 minHeight: "120px",
                 bgcolor: '#e0f7fa',
-                position: "sticky",
-                top: "100px",
-                zIndex: "2"
             }}
             onSubmit={onSubmit}
             autoComplete="off"

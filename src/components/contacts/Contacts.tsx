@@ -9,7 +9,7 @@ import { FC, useEffect, useState } from "react";
 import { logOut } from "../../services/firebase";
 import ContactForm from "./contactForm/ContactForm";
 import SearchForm from "./searchForm/SearchForm";
-import { shallowEqual, useDispatch } from "react-redux";
+import { shallowEqual } from "react-redux";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import {
     initContactsListTrack,
@@ -18,9 +18,6 @@ import {
 } from "../../store/contacts/actions";
 import { getContacts, getError, getLoading } from "../../store/contacts/contactsSelectors";
 import { useTypedDispatch } from "../hooks/useTypedDispatch";
-import { ThunkAction } from 'redux-thunk';
-import { ContactAction } from "../../store/contacts/types";
-import { RootState } from "../../store/contacts/contactsReducer";
 
 const Contacts: FC = () => {
     const dispatch = useTypedDispatch();
@@ -39,35 +36,42 @@ const Contacts: FC = () => {
     const [addFormVision, setAddFormVision] = useState<boolean>(false);
     const [searchFormVision, setSearchFormVision] = useState<boolean>(false);
 
+    const openAddForm = () => {
+        setAddFormVision(!addFormVision);
+        if (searchFormVision) setSearchFormVision(false);
+    }
+    const openSearchForm = () => {
+        dispatch(resetFilterContacts());
+        setSearchFormVision(!searchFormVision);
+        if (addFormVision) setAddFormVision(false);
+    }
+
     return (
         <section className="contacts wrapper" >
             <h1 className="contacts__heading">
-                Welcome to your contacts list!
+                Добро пожаловать в кабинет вашего списка контактов!
             </h1>
-            {error ? <h2 className="error">Error during connectiong to the database, please reboot the page</h2> : null}
+            {error ? <h2 className="error">Ошибка при подключении к базе данных, пожалуйста, перезагрузите страницу</h2> : null}
             {loading
                 ? <CircularProgress />
                 : <>
-                    <p>If you click on the buttons below you can add/search contact or logout.</p>
+                    <p>Нажав на книпки ниже вы откроете форму добавления или поиска контакта или выйдите из системы.</p>
                     <div className="contacts__actions">
                         <Tooltip title={addFormVision
-                            ? "Please click here to close add contact form"
-                            : "Please click here to open add contact form"} >
-                            <IconButton onClick={() => setAddFormVision(!addFormVision)}>
+                            ? "Закрыть форму добавления контакта"
+                            : "Открыть форму добавления контакта"} >
+                            <IconButton onClick={openAddForm}>
                                 <PersonAddIcon />
                             </IconButton>
                         </Tooltip>
                         <Tooltip title={searchFormVision
-                            ? "Please click here to reset search and close search form"
-                            : "Please click here to open search form"}>
-                            <IconButton onClick={() => {
-                                dispatch(resetFilterContacts())
-                                setSearchFormVision(!searchFormVision)
-                            }}>
+                            ? "Нажмите для сброса параметров поиска и закрытия формы"
+                            : "Открыть форму поиска"}>
+                            <IconButton onClick={openSearchForm}>
                                 <PersonSearchIcon />
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title="Please click here to logOut">
+                        <Tooltip title="Выйти из системы">
                             <IconButton onClick={logOut}>
                                 <LogoutIcon />
                             </IconButton>
@@ -97,7 +101,7 @@ const Contacts: FC = () => {
                                         />)
                                     :
                                     <p className="wrapper">
-                                        You don't have availiable contacts.
+                                        Ваш список контактов пуст.
                                     </p>
                             }
                         </List>

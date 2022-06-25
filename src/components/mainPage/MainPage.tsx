@@ -6,30 +6,36 @@ const MainPage: FC<IAuthProps> = ({ authed }) => {
 
     return (
         <section className={`font-effect-fire-animation wrapper`}>
-            <h1 >Welcome to my react contacts list cabinet SPA</h1>
-            <p >
-                This page has been created by Evgeny Eliseev.<br /><br />
-                I've used React, MUI, Router , Hooks, Redux, Redux-thunk, TS and FireBase to build it.<br /><br />
-                Here you can add/remove/modify you contacts list!<br /><br />
-                <a href="https://github.com/e-n-eliseev/contacts_list_cabinet">
-                    If you click here, you can visit my GitHub page!
-                </a>
-            </p>
-
             {!authed
                 ? <>
+                    <h1 >Здравствуйте! Приветствовую вас в приложении-менеджере контактов.</h1>
+                    <p>
+                        Приложение - пет проект Елисеева Евгения.
+                    </p>
+                    <p>
+                        Использованы следующие технологии React, MUI, Router , Hooks, Redux, Redux-thunk, TypeScript и FireBase
+                    </p>
+                    <p>
+                        В данном приложении можно добавить/редактировать/искать/удалить контакт.
+                    </p>
+                    <a href="https://github.com/e-n-eliseev/contacts_list_cabinet">
+                        Нажмите для перехода на страницу с исходным кодом проекта.
+                    </a>
+                    <p><strong>Работа с приложением невозможна без  авторизации.</strong></p>
                     <Link to={"/login"}>
-                        Please click here to LogIn or SignUp if you are in the first time here!<br />
+                        Нажмите здесь прохождения этой процедуры.
                     </Link>
-                    <p>You can't open contacts listpage without it!</p>
+
                 </>
                 : <>
-                    <p>You've signed In!!! Now you can take a look on your
-                        <Link to={"/contacts"}>  contacts list  </Link>
+                    <h1 >Рады что вы пользуетесь моим приложением.</h1>
+                    <p>
+                        Замечания и предложения можно отправлять на электронную почту: e.n.eliseev@mail.ru
+                    </p>
+                    <p>Для того, чтобы продолжить работу перейдите <Link to={"/contacts"}>по ссылке </Link>  или используйте верхнюю панель
                     </p>
                 </>
             }
-            <br />
         </section >
     )
 }

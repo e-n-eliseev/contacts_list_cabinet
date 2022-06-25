@@ -9,9 +9,9 @@ const NavBar: FC = () => {
     const handleChange = (event: MouseEvent): void => {
         const element = event.target as HTMLElement;
         if (element.tagName === "BUTTON") {
-            element.textContent === "Main Page"
+            element.dataset.name === "Main Page"
                 ? navigate(`/`)
-                : navigate(`/${element.textContent?.toLowerCase()}`)
+                : navigate(`/${element.dataset.name?.toLowerCase()}`)
         }
     };
 
@@ -30,8 +30,8 @@ const NavBar: FC = () => {
             width: "100%",
             zIndex: 4
         }} onClick={handleChange} >
-            <Tab label="Main Page" />
-            <Tab label="Contacts" />
+            <Tab label="Главная" data-name={"Main Page"} />
+            <Tab label="Контакты" data-name={"Contacts"} />
         </Box>
     );
 }

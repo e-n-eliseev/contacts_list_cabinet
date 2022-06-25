@@ -18,11 +18,12 @@ const PageNotFound: FC = () => {
 
     return (
         <>
-            <h1 className={'font-effect-fire-animation'}>
-                Sorry, the page is not found, please follow link below
+            <h1 className={'font-effect-fire-animation App__heading'}>
+                Извините, страница не найдена!
             </h1>
-            <img src={pic} alt="404" />
-            <Link to="/">to the main page....</Link>
+            <p>Пожалуйста, перейдите <Link to="/">по ссылке...</Link></p>
+            <img className="App__img" src={pic} alt="404" />
+
         </>
     )
 }
